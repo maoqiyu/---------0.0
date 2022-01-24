@@ -91,3 +91,71 @@ int main(){
 1  0x403010
 */
 #endif
+
+#if 0
+//C++引入了“引用类型”，即一个变量是另一个变量的别名
+int main(){
+    int a = 3;
+    int c = 1;
+    int &b = a;
+    
+    cout << a << "  " << b << endl;
+    cout << &a << "  " << &b << endl;
+    b = c;
+    cout << a << "  " << b << endl;
+    cout << &c << "  " << &b << endl;
+}
+/* 输出结果：说明a和b是同一变量的不同变量名;
+3  3
+0x61fe08  0x61fe08
+1  1
+0x61fe0c  0x61fe08
+*/
+#endif
+//函数重载，允许使用相同的函数名，通过参数类型不同来区分使用哪一个
+//不能通过返回类型来区分
+//函数需要：返回类型 函数名 （形式参数可有可无）
+#if 1
+
+int cadd(int a, int b){
+    return a+b;
+}
+double cadd(double a, double b){
+    return a+b;
+}
+int main(){
+    int a=3,b=4;
+    cout<<cadd(a,b);
+}
+
+#endif
+
+#if 1
+//运算符重载是用于自己定义的数据类型，一定有struc或class
+//运算符重载是重载函数的一种特殊类型，函数就包括了返回类型 函数名(确定了) (形式参数)
+#include<iostream>
+using namespace std;
+struct Vector2
+{ //{};放好分号!
+    double x;
+    double y;;
+};
+Vector2 operator * (double a,Vector2 p){//*和<<的有区别，但是目前我还不清楚在哪
+    Vector2 c;
+    c.x=a*p.x;
+    c.y=a*p.y;
+    return c;
+};
+ ostream& operator << (ostream& i,Vector2 p){
+    cout << p.x << "  " << p.y << endl;
+    return i;
+};
+int main(){
+    Vector2 p,d;
+    p.x=1.1;
+    p.y=2.2;
+    int a=2;
+    d=a*p;
+    cout<< d;
+}
+#endif
